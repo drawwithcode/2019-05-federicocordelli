@@ -1,17 +1,26 @@
 var capture;
+var imagesOk = [];
+var j = 1;
 
 function preload(){
+  for (var i=1; i<5; i++) {
+   imagesOk[i] = loadImage("addons/"+i+".png");
+ }
+
   // put preload code here
 }
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
 
+  noCursor();
+
   capture = createCapture(VIDEO);
   capture.size(640, 480);
   capture.hide();
   // put setup code here
 }
+
 
 function draw() {
 
@@ -22,25 +31,24 @@ function draw() {
   var myFeed = capture.loadPixels();
 
   push();
-imageMode(CENTER);
-  image(myFeed, width/2, height/2, windowWidth *1.640, windowHeight*1.480);
-    filter(GRAY);
+  imageMode(CENTER);
+  image(myFeed, width/2, height/2, 750, 480);
     pop();
+    imageMode(CENTER);
+    blend(imagesOk[j], 0, 0, 750, 480, 308, 73, 750, 480, DARKEST);
 
+      textFont("Roboto");
+      textSize(60);
+      textStyle(BOLD);
+      fill(255,255,255);
+      text("CLICK TO CHANGE FILTER",mouseX,mouseY);
 
-
-
-    for (var x= 25; x < windowWidth; x +=25) {
-      for (var y = 25; y < windowHeight; y += 25) {
-        var distance = dist(x, y, mouseX, mouseY);
-
-        var remap = map(distance, 0, 600, 0, 25);
-
-        fill("red");
-        noStroke();
-
-        ellipse(x,y,remap);
-      }
-    }
-  // put drawing code here
 }
+function mouseClicked() {
+  if(j===4) {
+    j=1;
+  } else if(j<4) {
+  j++;
+    }
+
+  }
