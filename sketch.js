@@ -15,10 +15,15 @@ function setup() {
 
   noCursor();
 
+
   capture = createCapture(VIDEO);
   capture.size(640, 480);
   capture.hide();
   // put setup code here
+}
+
+function keyPressed(SPACEBAR) {
+   save("helloWorld.png");
 }
 
 
@@ -35,13 +40,15 @@ function draw() {
   image(myFeed, width/2, height/2, 750, 480);
     pop();
     imageMode(CENTER);
-    blend(imagesOk[j], 0, 0, 750, 480, 308, 73, 750, 480, DARKEST);
+    blend(imagesOk[j], 0, 0, 750, 480, (width-750)/2, (height-480)/2, 750, 480, DARKEST);
+    // blend(imagesOk[j], 0, 0, 750, 480, 308, 73, 750, 480, DARKEST);
 
       textFont("Roboto");
       textSize(60);
       textStyle(BOLD);
       fill(255,255,255);
       text("CLICK TO CHANGE FILTER",mouseX,mouseY);
+      text("SPACEBAR TO SAVE A PIC",mouseX,mouseY-60);
 
 }
 function mouseClicked() {
